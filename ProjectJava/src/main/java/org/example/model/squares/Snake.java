@@ -1,25 +1,20 @@
 package org.example.model.squares;
+
 import org.example.model.Player;
 import org.example.ui.Screen;
 
-public class Snake implements SquareInfo
-{
+public class Snake implements SquareInfo {
     private final int goToSquare;
 
-    public Snake(int goToSquare)
-    {
+    public Snake(int goToSquare) {
         this.goToSquare = goToSquare;
     }
 
-    public void applyAction(Player currentPlayer)
-    {
-        if(currentPlayer.isHasImmunity())
-        {
+    public void applyAction(Player currentPlayer) {
+        if (currentPlayer.isHasImmunity()) {
             currentPlayer.setHasImmunity(false);
             Screen.displayMessage("Used immunity");
-        }
-        else
-        {
+        } else {
             currentPlayer.setCurrentPos(goToSquare);
             Screen.displayMessage("Pressed Snake ");
         }
