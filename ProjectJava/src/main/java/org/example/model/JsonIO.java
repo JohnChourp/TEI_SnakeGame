@@ -1,4 +1,5 @@
 package org.example.model;
+
 import org.example.model.boardType.Bounce;
 import org.example.model.boardType.Classic;
 import org.example.model.boardType.Loop;
@@ -8,18 +9,24 @@ import org.example.model.gameStart.RollDiceToEnter;
 import org.example.model.interaction.Interaction;
 import org.example.model.interaction.MoveOtherPlayer;
 import org.example.model.interaction.NoInteraction;
-import org.example.model.squares.*;
+import org.example.model.squares.Empty;
+import org.example.model.squares.GetImmunity;
+import org.example.model.squares.Ladder;
+import org.example.model.squares.Snake;
+import org.example.model.squares.SquareLoseTurn;
 import org.example.ui.Screen;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-import javax.swing.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
-import java.util.Set;
+
+import javax.swing.JFileChooser;
 
 public class JsonIO
 {
@@ -29,11 +36,9 @@ public class JsonIO
 	Die die = new Die();
 	PlayerList playerList = new PlayerList();
 
-	public JsonIO() throws IOException
-	{
+	public JsonIO() throws IOException, JSONException {
 		boolean tryAgain;
 		Screen.displayMessage("New Game or Saved Game?, type('new') or ('load')");
-
 		do
 		{
 			tryAgain = false;
@@ -56,10 +61,9 @@ public class JsonIO
         while(tryAgain);
 	}
 
-	private void setJsonPlayerList() throws IOException
-	{
+	private void setJsonPlayerList() throws IOException, JSONException {
 		String contents;
-		chooser.setCurrentDirectory(new File("src\\main\\resources\\JsonFiles\\"));
+		chooser.setCurrentDirectory(new File("C:\\Users\\John\\Downloads\\logismikou\\SnakeAndFussyBoardGame\\ProjectJava\\src\\main\\resources\\JsonFiles"));
 		chooser.setDialogTitle("Choose a Game");
 		contents = new String(Files.readAllBytes(Paths.get(String.valueOf(getFileChooser()))));
 		obj = new JSONObject(contents);
@@ -83,14 +87,12 @@ public class JsonIO
 		return chooser.getSelectedFile();
 	}
 
-	public Die getDie()
-	{
+	public Die getDie() throws JSONException {
 		die.setDieBound(obj.getInt("dieNumber"));
 		return die;
 	}
 
-	public GameStart getGameStart()
-	{
+	public GameStart getGameStart() throws JSONException {
 		GameStart gameStart = null;
 
 		switch (obj.getString("GameStart"))
@@ -106,8 +108,7 @@ public class JsonIO
 		return gameStart;
 	}
 
-	public Interaction getInteraction()
-	{
+	public Interaction getInteraction() throws JSONException {
 		JSONObject interactObject = (JSONObject) obj.get("Interaction");
 		Interaction interaction = null;
 
@@ -123,8 +124,7 @@ public class JsonIO
 		return interaction;
 	}
 
-	public Board getBoard()
-	{
+	public Board getBoard() throws JSONException {
 		JSONObject jsonBoard = obj.getJSONObject("Board");
 		JSONObject jsonBoardType = jsonBoard.getJSONObject("boardType");
 		JSONArray squares = jsonBoard.getJSONArray("squares");
@@ -175,17 +175,15 @@ public class JsonIO
 		return new Player();
 	}
 
-	public PlayerList getPlayerList()
-	{
-		Set<?> s =  this.JsonPlayerList.keySet();
-		Iterator<?> i = s.iterator();
+	public PlayerList getPlayerList() throws JSONException {
+		Iterator<?> iterator = this.JsonPlayerList.keys();
 		Player player;
 		JSONObject playerObject;
 
 		do
 		{
 			player = new Player();
-			playerObject = (JSONObject) this.JsonPlayerList.get(i.next().toString());
+			playerObject = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
 
 			player.setName(playerObject.getString("name"));
 			player.setCurrentPos(playerObject.getInt("currentPos"));
@@ -195,14 +193,13 @@ public class JsonIO
 			player.setRound(playerObject.getInt("round"));
 			playerList.setPlayer(player);
 		}
-		while(i.hasNext());
+		while(iterator.hasNext());
 
 		return playerList;
 	}
 
-	public void saveGame() throws IOException
-	{
-		chooser.setCurrentDirectory(new java.io.File("src\\main\\resources\\JsonFilesSaved\\"));
+	public void saveGame() throws IOException, JSONException {
+		chooser.setCurrentDirectory(new java.io.File("C:\\Users\\John\\Downloads\\logismikou\\SnakeAndFussyBoardGame\\ProjectJava\\src\\main\\resources\\JsonFilesSaved"));
 		chooser.setDialogTitle("Choose a Game Slot to Save");
 		FileWriter file = new FileWriter(getFileChooser());
 
@@ -213,14 +210,13 @@ public class JsonIO
 		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":\n\t{\n");
 
 		JSONObject player;
-		Set<?> s =  this.JsonPlayerList.keySet();
-		Iterator<?> i = s.iterator();
+		Iterator<?> iterator = this.JsonPlayerList.keys();
 		int j = 0;
 
 		do
 		{
 			j += 1;
-			player = (JSONObject) this.JsonPlayerList.get(i.next().toString());
+			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
 			player.put("name", playerList.getCurrentPlayer().getName());
 			player.put("currentPos", playerList.getCurrentPlayer().getCurrentPos());
 			player.put("lostTurn", playerList.getCurrentPlayer().isLostTurn());
@@ -237,7 +233,7 @@ public class JsonIO
 			file.write("\n");
 			playerList.setNextPlayer();
 		}
-		while(i.hasNext());
+		while(iterator.hasNext());
 
 		file.write("\t}\n}");
 		file.flush();
