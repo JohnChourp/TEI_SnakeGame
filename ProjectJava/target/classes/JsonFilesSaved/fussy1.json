@@ -1,0 +1,16 @@
+{
+"dieNumber":1,
+"GameStart":"rollDiceToEnter",
+"Interaction":{"InteractType":"MoveOtherPlayer","sendPlayerTo":0},
+"Board":{"boardType":{"type":"Loop","rounds":5},"squares":[{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"},{"SquareInfo":"GetImmunity"},{"SquareInfo":"Empty"},{"SquareInfo":"SquareLoseTurn"},{"SquareInfo":"Empty"},{"SquareInfo":"Empty"}]},
+"turn":0,
+"playerList":
+	{
+	"player1":
+		{"round":4,"canPlayAtStart":true,"name":"John","lostTurn":false,"currentPos":31,"hasImmunity":true},
+	"player2":
+		{"round":4,"canPlayAtStart":true,"name":"George","lostTurn":false,"currentPos":6,"hasImmunity":false},
+	"player3":
+		{"round":5,"canPlayAtStart":true,"name":"Jim","lostTurn":false,"currentPos":49,"hasImmunity":true}
+	}
+}
