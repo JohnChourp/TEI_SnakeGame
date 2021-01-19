@@ -43,6 +43,7 @@ public class GameState {
     }
 
     public void setNextPlayer() {
+
         if (isQuit()) {
             playerList.setNextPlayer();
         }
