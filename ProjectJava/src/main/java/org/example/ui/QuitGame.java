@@ -1,17 +1,14 @@
 package org.example.ui;
 
-public class QuitGame
-{
+public class QuitGame {
     boolean quit;
     boolean tryAgain;
 
-    public boolean isQuit()
-    {
+    public boolean isQuit() {
         return quit;
     }
 
-    public boolean isQuitPrompt()
-    {
+    public boolean isQuitPrompt() {
 //        Screen.displayMessage("Quit game yes ('y') or no ('n').");
 //
 //        do
