@@ -7,10 +7,10 @@
 "playerList":
 	{
 	"player2":
-		{"round":497,"canPlayAtStart":true,"name":"George","lostTurn":false,"currentPos":11,"hasImmunity":true},
+		{"round":488,"canPlayAtStart":true,"name":"George","lostTurn":false,"currentPos":1,"hasImmunity":false},
 	"player3":
-		{"round":509,"canPlayAtStart":true,"name":"Jim","lostTurn":false,"currentPos":39,"hasImmunity":true},
+		{"round":515,"canPlayAtStart":true,"name":"Jim","lostTurn":false,"currentPos":27,"hasImmunity":true},
 	"player1":
-		{"round":500,"canPlayAtStart":true,"name":"John","lostTurn":false,"currentPos":49,"hasImmunity":false}
+		{"round":500,"canPlayAtStart":true,"name":"John","lostTurn":false,"currentPos":49,"hasImmunity":true}
 	}
 }
