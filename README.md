@@ -1,1 +1,1 @@
-# SnakeAndFussyBoardGame
+# BoardGames
