@@ -56,7 +56,7 @@ public class JsonIO {
 
 	private void setJsonPlayerList() throws IOException, JSONException {
 		String contents;
-		chooser.setCurrentDirectory(new File("C:\\Users\\John\\Documents\\github\\ SnakeAndFussyBoardGame\\ProjectJava\\src\\main\\resources\\JsonFiles"));
+		chooser.setCurrentDirectory(new File("ProjectJava\\src\\main\\resources\\JsonFiles"));
 		chooser.setDialogTitle("Choose a Game");
 		contents = new String(Files.readAllBytes(Paths.get(String.valueOf(getFileChooser()))));
 		obj = new JSONObject(contents);
@@ -178,7 +178,7 @@ public class JsonIO {
 	}
 
 	public void saveGame() throws IOException, JSONException {
-		chooser.setCurrentDirectory(new java.io.File("C:\\Users\\John\\Documents\\github\\ SnakeAndFussyBoardGame\\ProjectJava\\src\\main\\resources\\JsonFilesSaved"));
+		chooser.setCurrentDirectory(new java.io.File("ProjectJava\\src\\main\\resources\\JsonFilesSaved"));
 		chooser.setDialogTitle("Choose a Game Slot to Save");
 		FileWriter file = new FileWriter(getFileChooser());
 
