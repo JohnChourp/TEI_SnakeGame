@@ -11,17 +11,12 @@ public class Bounce implements BoardType {
 		this.lastSquare = squares;
 	}
 
-	public void endAction(int posAfterRoll, Player player) {
-
+	public boolean endAction(int posAfterRoll, Player player) {
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = 2 * lastSquare - posAfterRoll;
 			Screen.displayMessage("Hit Board and Bounced back " + (lastSquare - posAfterRoll) + " squares , new position is " + (posAfterRoll + 1));
 		}
 		player.setCurrentPos(posAfterRoll);
-		winner = posAfterRoll == lastSquare;
-	}
-
-	public boolean isWinner() {
-		return winner;
+		return winner = posAfterRoll == lastSquare;
 	}
 }

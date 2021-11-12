@@ -10,16 +10,13 @@ public class Classic implements BoardType {
 		this.lastSquare = squares;
 	}
 
-	public void endAction(int posAfterRoll, Player player) {
+	public boolean endAction(int posAfterRoll, Player player) {
 		if (posAfterRoll >= lastSquare) {
 			winner = true;
 			player.setCurrentPos(lastSquare);
 		} else {
 			player.setCurrentPos(posAfterRoll);
 		}
-	}
-
-	public boolean isWinner() {
 		return winner;
 	}
 }

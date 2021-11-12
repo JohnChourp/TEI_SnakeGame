@@ -23,8 +23,4 @@ public class Board {
 	public void setBoardType(BoardType boardType) {
 		this.boardType = boardType;
 	}
-
-	public boolean isWinner() {
-		return boardType.isWinner();
-	}
 }

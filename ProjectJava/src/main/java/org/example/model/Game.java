@@ -15,6 +15,7 @@ public class Game {
 	public void play() {
 		Player player;
 		PlayerList playerList = gameState.getPlayerList();
+		boolean winner = false;
 
 		do {
 			player = gameState.setCurrentPlayer();
@@ -22,7 +23,7 @@ public class Game {
 			gameState.setStartCondition();
 
 			if (player.isCanPlayAtStart() && gameState.isQuit() && ! player.isLostTurn()) {
-				gameState.setEndAction();
+				winner = gameState.setEndAction();
 				Screen.displayMessage("Die number is " + gameState.getDieNumber());
 				gameState.setApplyAction();
 				gameState.setMeetPlayerAction();
@@ -31,7 +32,7 @@ public class Game {
 				player.setLostTurn(false);
 			}
 			gameState.setNextPlayer();
-		} while (! gameState.isWinner() && gameState.isQuit());
+		} while (! winner && gameState.isQuit());
 
 		if (gameState.isQuit()) {
 			Screen.displayMessage("\n!!! Player " + player.getName() + " Won !!!");

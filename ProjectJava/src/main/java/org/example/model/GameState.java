@@ -31,16 +31,12 @@ public class GameState {
 		return playerList;
 	}
 
-	public void setEndAction() {
-		board.getBoardType().endAction(currentPlayer.getCurrentPos() + rollDie(), currentPlayer);
+	public boolean setEndAction() {
+		return board.getBoardType().endAction(currentPlayer.getCurrentPos() + rollDie(), currentPlayer);
 	}
 
 	public void setApplyAction() {
 		board.getSquares().get(currentPlayer.getCurrentPos()).applyAction(currentPlayer);
-	}
-
-	public boolean isWinner() {
-		return board.isWinner();
 	}
 
 	public void setNextPlayer() {
