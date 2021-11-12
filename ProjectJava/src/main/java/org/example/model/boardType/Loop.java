@@ -13,7 +13,7 @@ public class Loop implements BoardType {
 		this.lastSquare = squares;
 	}
 
-	public boolean endAction(int posAfterRoll, Player player) {
+	public boolean boardTypeAction(int posAfterRoll, Player player) {
 
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = posAfterRoll - lastSquare;

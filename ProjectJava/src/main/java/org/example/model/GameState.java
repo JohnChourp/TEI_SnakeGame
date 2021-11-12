@@ -23,49 +23,40 @@ public class GameState {
 		this.currentPlayer = currentPlayer;
 	}
 
-	public Player setCurrentPlayer() {
-		return currentPlayer = playerList.getCurrentPlayer();
-	}
-
 	public PlayerList getPlayerList() {
 		return playerList;
 	}
 
-	public boolean setEndAction() {
-		return board.getBoardType().endAction(currentPlayer.getCurrentPos() + rollDie(), currentPlayer);
+	public Player setCurrentPlayer() {
+		return currentPlayer = playerList.getCurrentPlayer();
 	}
 
-	public void setApplyAction() {
-		board.getSquares().get(currentPlayer.getCurrentPos()).applyAction(currentPlayer);
+	public void gameStartAction() {
+		if (quit.isQuitPrompt()) {
+			gameStart.gameStartAction(currentPlayer);
+		}
+	}
+
+	public boolean boardTypeAction() {
+		return board.getBoardType().boardTypeAction(currentPlayer.getCurrentPos() + die.rollDie(), currentPlayer);
+	}
+
+	public void squareInfoAction() {
+		board.getSquares().get(currentPlayer.getCurrentPos()).squareInfoAction(currentPlayer);
+	}
+
+	public void interactionAction() {
+		interaction.interactionAction(currentPlayer);
 	}
 
 	public void setNextPlayer() {
-
-		if (isQuit()) {
+		if (quit.isQuit()) {
 			playerList.setNextPlayer();
 		}
 	}
 
-	public int rollDie() {
-		return die.rollDie();
-	}
-
 	public int getDieNumber() {
 		return die.getDieNumber();
-	}
-
-	public void setStartCondition() {
-		if (isQuitPrompt()) {
-			gameStart.startCondition(currentPlayer);
-		}
-	}
-
-	public void setMeetPlayerAction() {
-		interaction.meetPlayerAction(currentPlayer);
-	}
-
-	public boolean isQuitPrompt() {
-		return quit.isQuitPrompt();
 	}
 
 	public boolean isQuit() {

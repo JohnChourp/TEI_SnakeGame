@@ -11,7 +11,7 @@ public class RollDiceToEnter implements GameStart {
 		this.die = die;
 	}
 
-	public void startCondition(Player currentPlayer) {
+	public void gameStartAction(Player currentPlayer) {
 		if (! currentPlayer.isCanPlayAtStart()) {
 			currentPlayer.setCanPlayAtStart(die.rollDie() == 6);
 			Screen.displayMessage("Die number is " + die.rollDie());

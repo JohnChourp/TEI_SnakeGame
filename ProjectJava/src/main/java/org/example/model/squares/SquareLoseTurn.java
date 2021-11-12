@@ -4,7 +4,7 @@ import org.example.model.Player;
 import org.example.model.ui.Screen;
 
 public class SquareLoseTurn implements SquareInfo {
-	public void applyAction(Player currentPlayer) {
+	public void squareInfoAction(Player currentPlayer) {
 		if (currentPlayer.isHasImmunity()) {
 			currentPlayer.setHasImmunity(false);
 			Screen.displayMessage("Used immunity");

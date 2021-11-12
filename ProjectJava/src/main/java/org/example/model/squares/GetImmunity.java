@@ -4,7 +4,7 @@ import org.example.model.Player;
 import org.example.model.ui.Screen;
 
 public class GetImmunity implements SquareInfo {
-	public void applyAction(Player currentPlayer) {
+	public void squareInfoAction(Player currentPlayer) {
 		currentPlayer.setHasImmunity(true);
 		Screen.displayMessage("Got immunity");
 	}

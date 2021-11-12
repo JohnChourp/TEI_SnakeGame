@@ -10,7 +10,7 @@ public class Ladder implements SquareInfo {
 		this.goToSquare = goToSquare;
 	}
 
-	public void applyAction(Player currentPlayer) {
+	public void squareInfoAction(Player currentPlayer) {
 		currentPlayer.setCurrentPos(goToSquare);
 		Screen.displayMessage("Pressed ladder ");
 	}

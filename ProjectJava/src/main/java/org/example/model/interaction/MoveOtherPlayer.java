@@ -13,7 +13,7 @@ public class MoveOtherPlayer implements Interaction {
 		this.playerList = playerList;
 	}
 
-	public void meetPlayerAction(Player currentPlayer) {
+	public void interactionAction(Player currentPlayer) {
 		for (int i = 0; i < playerList.getPlayerListSize(); i++) {
 			if (currentPlayer.getCurrentPos() == playerList.getPlayerPos(i) && i != playerList.getCurrentPlayerNumber()) {
 				Screen.displayMessage(currentPlayer.getName() + " hits " + playerList.getPlayer(i).getName());

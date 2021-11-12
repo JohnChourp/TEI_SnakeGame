@@ -11,7 +11,7 @@ public class Bounce implements BoardType {
 		this.lastSquare = squares;
 	}
 
-	public boolean endAction(int posAfterRoll, Player player) {
+	public boolean boardTypeAction(int posAfterRoll, Player player) {
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = 2 * lastSquare - posAfterRoll;
 			Screen.displayMessage("Hit Board and Bounced back " + (lastSquare - posAfterRoll) + " squares , new position is " + (posAfterRoll + 1));
