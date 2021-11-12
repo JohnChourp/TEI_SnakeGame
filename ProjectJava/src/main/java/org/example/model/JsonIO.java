@@ -181,11 +181,11 @@ public class JsonIO {
 		chooser.setDialogTitle("Choose a Game Slot to Save");
 		FileWriter file = new FileWriter(getFileChooser());
 
-		file.write("{\n\"dieNumber\":" + die.getDieBound() + ",\n");
+		file.write("{\"dieNumber\":" + die.getDieBound() + ",\n");
 		file.write("\"GameStart\":\"" + obj.getString("GameStart") + "\",\n");
 		file.write("\"Interaction\":" + obj.get("Interaction") + ",\n");
 		file.write("\"Board\":" + obj.getJSONObject("Board") + ",\n");
-		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":\n\t{\n");
+		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":{\n");
 
 		JSONObject player;
 		Iterator<?> iterator = this.JsonPlayerList.keys();
@@ -194,15 +194,14 @@ public class JsonIO {
 		do {
 			j += 1;
 			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
-			player.put("name", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getName());
-			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getCurrentPos());
-			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isLostTurn());
-			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isCanPlayAtStart());
-			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isHasImmunity());
+			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":" + player);
 			player.put("round", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getRound());
-			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":\n\t\t" + player);
-
-			if (j < playerList.getPlayerList().size()) {
+			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isCanPlayAtStart());
+			player.put("name", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getName());
+			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isLostTurn());
+			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getCurrentPos());
+			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isHasImmunity());
+			if (j < this.JsonPlayerList.length()) {
 				file.write(",");
 			}
 			file.write("\n");
