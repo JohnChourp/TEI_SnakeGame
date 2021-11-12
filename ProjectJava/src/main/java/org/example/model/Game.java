@@ -27,7 +27,7 @@ public class Game {
 				Screen.displayMessage("Die number is " + gameState.getDieNumber());
 				gameState.squareInfoAction();
 				gameState.interactionAction();
-				Screen.displayMessage("New position is " + (playerList.getCurrentPlayerPos() + 1));
+				Screen.displayMessage("New position is " + (playerList.getPlayerList().get(playerList.getCurrentPlayerNumber()).getCurrentPos() + 1));
 			} else {
 				player.setLostTurn(false);
 			}
