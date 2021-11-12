@@ -162,9 +162,9 @@ public class JsonIO {
 		JSONObject jsonPlayer;
 		Player player;
 
-		for (int i = 1; i < 4; i++) {
+		for (int i = 0; i < jsonPlayerList.length(); i++) {
 			player = new Player();
-			jsonPlayer = jsonPlayerList.getJSONObject("player" + i);
+			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
 
 			player.setCanPlayAtStart(jsonPlayer.getBoolean("canPlayAtStart"));
 			player.setName(jsonPlayer.getString("name"));
@@ -194,7 +194,7 @@ public class JsonIO {
 		file.write("\"turn\":" + playerList.getPlayerNumber() + ",\n");
 		file.write("\"playerList\":{");
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < jsonPlayerList.length(); i++) {
 			file.write("\"player" + (i+1) + "\"" + ":");
 			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
 			jsonPlayer.put("round", playerList.getPlayerList().get(i).getRound());
@@ -204,7 +204,7 @@ public class JsonIO {
 			jsonPlayer.put("pos", playerList.getPlayerList().get(i).getPos());
 			jsonPlayer.put("hasImmunity", playerList.getPlayerList().get(i).isHasImmunity());
 			file.write(String.valueOf(jsonPlayer));
-			if (i < 2) {
+			if (i < (jsonPlayerList.length()-1)) {
 				file.write(",");
 			}
 			file.write("\n");
