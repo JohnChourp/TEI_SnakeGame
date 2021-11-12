@@ -9,27 +9,24 @@ public class QuitGame {
 	}
 
 	public boolean isQuitPrompt() {
-		//        Screen.displayMessage("Quit game yes ('y') or no ('n').");
-		//
-		//        do
-		//        {
-		//            tryAgain = false;
-		//            quit = true;
-		//
-		//            switch (Screen.promptString())
-		//            {
-		//                case "y":
-		//                    quit = false;
-		//                    break;
-		//                case "n":
-		//                    break;
-		//                default:
-		//                    Screen.displayMessage("Invalid option, Try again");
-		//                    tryAgain = true;
-		//                    break;
-		//            }
-		//        }
-		//        while(tryAgain);
+//		Screen.displayMessage("Quit game yes ('y') or no ('n').");
+//
+//		do {
+//			tryAgain = false;
+//			quit = true;
+//
+//			switch (Screen.promptString()) {
+//				case "y":
+//					quit = false;
+//					break;
+//				case "n":
+//					break;
+//				default:
+//					Screen.displayMessage("Invalid option, Try again");
+//					tryAgain = true;
+//					break;
+//			}
+//		} while (tryAgain);
 		quit = true;
 		return quit;
 	}

@@ -141,8 +141,8 @@ public class JsonIO {
 				case "Snake":
 					board.addSquare(new Snake(square.getInt("GotoSquare")));
 					break;
-				case "SquareLoseTurn":
-					board.addSquare(new SquareLoseTurn());
+				case "loseTurn":
+					board.addSquare(new loseTurn());
 					break;
 				case "GetImmunity":
 					board.addSquare(new GetImmunity());
