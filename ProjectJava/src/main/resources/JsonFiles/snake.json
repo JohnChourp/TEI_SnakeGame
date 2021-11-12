@@ -103,9 +103,11 @@
       {"SquareInfo": "Empty"},
       {"SquareInfo": "Empty"},
       {"SquareInfo": "Snake","GotoSquare":29},
+      {"SquareInfo": "Empty"},
       {"SquareInfo": "Empty"}
     ]
   },
+  "turn":0,
   "playerList": {
     "player1": {
       "canPlayAtStart":true,
@@ -113,7 +115,7 @@
       "lostTurn":false,
       "pos":0,
       "hasImmunity":false,
-      "round": 0
+      "round":0
     },
     "player2": {
       "canPlayAtStart":true,
@@ -121,7 +123,7 @@
       "lostTurn":false,
       "pos":0,
       "hasImmunity":false,
-      "round": 0
+      "round":0
     },
     "player3": {
       "canPlayAtStart":true,
@@ -129,7 +131,7 @@
       "lostTurn":false,
       "pos":0,
       "hasImmunity":false,
-      "round": 0
+      "round":0
     }
   }
 }
