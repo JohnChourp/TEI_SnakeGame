@@ -28,7 +28,7 @@ public class GameState {
 	}
 
 	public Player setCurrentPlayer() {
-		return currentPlayer = playerList.getCurrentPlayer();
+		return currentPlayer = playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber());
 	}
 
 	public void gameStartAction() {
@@ -51,7 +51,7 @@ public class GameState {
 
 	public void setNextPlayer() {
 		if (quit.isQuit()) {
-			playerList.setNextPlayer();
+			playerList.setCurrentPlayerNumber();
 		}
 	}
 

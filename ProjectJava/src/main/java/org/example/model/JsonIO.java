@@ -152,7 +152,7 @@ public class JsonIO {
 		return board;
 	}
 
-	public Player getCurrentPlayer() {
+	public Player setPlayer() {
 		return new Player();
 	}
 
@@ -194,19 +194,19 @@ public class JsonIO {
 		do {
 			j += 1;
 			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
-			player.put("name", playerList.getCurrentPlayer().getName());
-			player.put("currentPos", playerList.getCurrentPlayer().getCurrentPos());
-			player.put("lostTurn", playerList.getCurrentPlayer().isLostTurn());
-			player.put("canPlayAtStart", playerList.getCurrentPlayer().isCanPlayAtStart());
-			player.put("hasImmunity", playerList.getCurrentPlayer().isHasImmunity());
-			player.put("round", playerList.getCurrentPlayer().getRound());
+			player.put("name", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getName());
+			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getCurrentPos());
+			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isLostTurn());
+			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isCanPlayAtStart());
+			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isHasImmunity());
+			player.put("round", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getRound());
 			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":\n\t\t" + player);
 
-			if (j < playerList.getPlayerListSize()) {
+			if (j < playerList.getPlayerList().size()) {
 				file.write(",");
 			}
 			file.write("\n");
-			playerList.setNextPlayer();
+			playerList.setCurrentPlayerNumber();
 		} while (iterator.hasNext());
 
 		file.write("\t}\n}");
