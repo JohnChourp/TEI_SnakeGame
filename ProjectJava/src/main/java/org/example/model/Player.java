@@ -2,7 +2,7 @@ package org.example.model;
 
 public class Player {
 	private String name;
-	private int currentPos;
+	private int pos;
 	private boolean lostTurn;
 	private boolean canPlayAtStart;
 	private boolean hasImmunity;
@@ -16,12 +16,12 @@ public class Player {
 		this.name = name;
 	}
 
-	public int getCurrentPos() {
-		return currentPos;
+	public int getPos() {
+		return pos;
 	}
 
-	public void setCurrentPos(int currentPos) {
-		this.currentPos = currentPos;
+	public void setPos(int pos) {
+		this.pos = pos;
 	}
 
 	public boolean isLostTurn() {
@@ -56,7 +56,7 @@ public class Player {
 		this.round = round;
 	}
 
-	public void setRounds() {
+	public void setRound() {
 		this.round = round + 1;
 	}
 }

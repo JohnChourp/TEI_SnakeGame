@@ -12,15 +12,15 @@ public class GameState {
 	private final GameStart gameStart;
 	private final Interaction interaction;
 	private final QuitGame quit = new QuitGame();
-	private Player currentPlayer;
+	private Player player;
 
-	public GameState(Board board, PlayerList playerList, Die die, GameStart gameStart, Interaction interaction, Player currentPlayer) {
+	public GameState(Board board, PlayerList playerList, Die die, GameStart gameStart, Interaction interaction, Player player) {
 		this.board = board;
 		this.playerList = playerList;
 		this.die = die;
 		this.gameStart = gameStart;
 		this.interaction = interaction;
-		this.currentPlayer = currentPlayer;
+		this.player = player;
 	}
 
 	public PlayerList getPlayerList() {
@@ -28,30 +28,30 @@ public class GameState {
 	}
 
 	public Player setCurrentPlayer() {
-		return currentPlayer = playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber());
+		return player = playerList.getPlayerList().get(playerList.getPlayerNumber());
 	}
 
 	public void gameStartAction() {
 		if (quit.isQuitPrompt()) {
-			gameStart.gameStartAction(currentPlayer);
+			gameStart.gameStartAction(player);
 		}
 	}
 
 	public boolean boardTypeAction() {
-		return board.getBoardType().boardTypeAction(currentPlayer.getCurrentPos() + die.rollDie(), currentPlayer);
+		return board.getBoardType().boardTypeAction(player.getPos() + die.rollDie(), player);
 	}
 
 	public void squareInfoAction() {
-		board.getSquares().get(currentPlayer.getCurrentPos()).squareInfoAction(currentPlayer);
+		board.getSquares().get(player.getPos()).squareInfoAction(player);
 	}
 
 	public void interactionAction() {
-		interaction.interactionAction(currentPlayer);
+		interaction.interactionAction(player);
 	}
 
 	public void setNextPlayer() {
 		if (quit.isQuit()) {
-			playerList.setCurrentPlayerNumber();
+			playerList.setNextPlayerNumber();
 		}
 	}
 

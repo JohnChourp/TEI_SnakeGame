@@ -13,9 +13,9 @@ public class Classic implements BoardType {
 	public boolean boardTypeAction(int posAfterRoll, Player player) {
 		if (posAfterRoll >= lastSquare) {
 			winner = true;
-			player.setCurrentPos(lastSquare);
+			player.setPos(lastSquare);
 		} else {
-			player.setCurrentPos(posAfterRoll);
+			player.setPos(posAfterRoll);
 		}
 		return winner;
 	}

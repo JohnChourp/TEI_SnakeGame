@@ -5,25 +5,25 @@ import java.util.List;
 
 public class PlayerList {
 	private final List<Player> playerList = new ArrayList<>();
-	private int currentPlayerNumber = 0;
+	private int playerNumber = 0;
 
 	public List<Player> getPlayerList() {
 		return playerList;
 	}
 
-	public void setPlayer(Player playerToAdd) {
+	public void setPlayerList(Player playerToAdd) {
 		playerList.add(playerToAdd);
 	}
 
-	public int getCurrentPlayerNumber() {
-		return currentPlayerNumber;
+	public int getPlayerNumber() {
+		return playerNumber;
 	}
 
-	public void setCurrentPlayerNumber(int currentPlayer) {
-		this.currentPlayerNumber = currentPlayer;
+	public void setPlayerNumber(int currentPlayer) {
+		this.playerNumber = currentPlayer;
 	}
 
-	public void setCurrentPlayerNumber() {
-		currentPlayerNumber = (currentPlayerNumber + 1) % playerList.size();
+	public void setNextPlayerNumber() {
+		playerNumber = (playerNumber + 1) % playerList.size();
 	}
 }
