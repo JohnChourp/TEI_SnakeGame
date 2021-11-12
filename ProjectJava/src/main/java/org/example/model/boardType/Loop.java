@@ -17,13 +17,13 @@ public class Loop implements BoardType {
 
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = posAfterRoll - lastSquare;
-			player.setRounds();
+			player.setRound();
 			Screen.displayMessage(player.getName() + " Looped " + player.getRound() + " Times");
 		}
-		player.setCurrentPos(posAfterRoll);
+		player.setPos(posAfterRoll);
 
 		if (player.getRound() == rounds) {
-			player.setCurrentPos(lastSquare);
+			player.setPos(lastSquare);
 			winner = true;
 		}
 		return winner;

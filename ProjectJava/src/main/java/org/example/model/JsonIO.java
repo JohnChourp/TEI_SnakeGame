@@ -22,46 +22,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 
 public class JsonIO {
 	JSONObject obj;
-	JSONObject JsonPlayerList;
 	JFileChooser chooser = new JFileChooser();
 	Die die = new Die();
 	PlayerList playerList = new PlayerList();
-
-	public JsonIO() throws IOException, JSONException {
-		boolean tryAgain;
-		Screen.displayMessage("New Game or Saved Game?, type('new') or ('load')");
-
-		do {
-			tryAgain = false;
-
-			switch (Screen.promptString()) {
-				case "new":
-					setJsonPlayerList();
-					break;
-				case "load":
-					setJsonPlayerList();
-					playerList.setCurrentPlayerNumber(obj.getInt("turn"));
-					break;
-				default:
-					Screen.displayMessage("Invalid option, Try again");
-					tryAgain = true;
-					break;
-			}
-		} while (tryAgain);
-	}
-
-	private void setJsonPlayerList() throws IOException, JSONException {
-		String contents;
-		chooser.setCurrentDirectory(new File("ProjectJava/src/main/resources/JsonFiles"));
-		chooser.setDialogTitle("Choose a Game");
-		contents = new String(Files.readAllBytes(Paths.get(String.valueOf(getFileChooser()))));
-		obj = new JSONObject(contents);
-		JsonPlayerList = obj.getJSONObject("playerList");
-	}
 
 	private File getFileChooser() {
 		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -75,12 +41,51 @@ public class JsonIO {
 		return chooser.getSelectedFile();
 	}
 
-	public Die getDie() throws JSONException {
+	private void newGame() throws IOException, JSONException {
+		String contents;
+		chooser.setCurrentDirectory(new File("ProjectJava/src/main/resources/JsonFiles"));
+		chooser.setDialogTitle("Choose a Game");
+		contents = new String(Files.readAllBytes(Paths.get(String.valueOf(getFileChooser()))));
+		obj = new JSONObject(contents);
+	}
+
+	private void loadGame() throws IOException, JSONException {
+		String contents;
+		chooser.setCurrentDirectory(new File("ProjectJava/src/main/resources/JsonFilesSaved"));
+		chooser.setDialogTitle("Choose a Game");
+		contents = new String(Files.readAllBytes(Paths.get(String.valueOf(getFileChooser()))));
+		obj = new JSONObject(contents);
+	}
+
+	public JsonIO() throws IOException, JSONException {
+		boolean tryAgain;
+		Screen.displayMessage("New Game or Saved Game?, type('new') or ('load')");
+
+		do {
+			tryAgain = false;
+
+			switch (Screen.promptString()) {
+				case "new":
+					newGame();
+					break;
+				case "load":
+					loadGame();
+					playerList.setPlayerNumber(obj.getInt("turn"));
+					break;
+				default:
+					Screen.displayMessage("Invalid option, Try again");
+					tryAgain = true;
+					break;
+			}
+		} while (tryAgain);
+	}
+
+	public Die loadDie() throws JSONException {
 		die.setDieBound(obj.getInt("dieNumber"));
 		return die;
 	}
 
-	public GameStart getGameStart() throws JSONException {
+	public GameStart loadGameStart() throws JSONException {
 		GameStart gameStart = null;
 
 		switch (obj.getString("GameStart")) {
@@ -94,7 +99,7 @@ public class JsonIO {
 		return gameStart;
 	}
 
-	public Interaction getInteraction() throws JSONException {
+	public Interaction loadInteraction() throws JSONException {
 		JSONObject interactObject = (JSONObject) obj.get("Interaction");
 		Interaction interaction = null;
 
@@ -109,9 +114,9 @@ public class JsonIO {
 		return interaction;
 	}
 
-	public Board getBoard() throws JSONException {
+	public Board loadBoard() throws JSONException {
+		JSONObject jsonBoardType = (JSONObject) obj.get("boardType");
 		JSONObject jsonBoard = obj.getJSONObject("Board");
-		JSONObject jsonBoardType = jsonBoard.getJSONObject("boardType");
 		JSONArray squares = jsonBoard.getJSONArray("squares");
 		JSONObject square;
 		Board board = new Board();
@@ -152,62 +157,59 @@ public class JsonIO {
 		return board;
 	}
 
-	public Player setPlayer() {
-		return new Player();
-	}
-
-	public PlayerList getPlayerList() throws JSONException {
-		Iterator<?> iterator = this.JsonPlayerList.keys();
+	public PlayerList loadPlayerList() throws JSONException {
+		JSONObject jsonPlayerList = obj.getJSONObject("playerList");
+		JSONObject jsonPlayer;
 		Player player;
-		JSONObject playerObject;
 
-		do {
+		for (int i = 0; i < jsonPlayerList.length(); i++) {
 			player = new Player();
-			playerObject = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
+			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
 
-			player.setName(playerObject.getString("name"));
-			player.setCurrentPos(playerObject.getInt("currentPos"));
-			player.setLostTurn(playerObject.getBoolean("lostTurn"));
-			player.setCanPlayAtStart(playerObject.getBoolean("canPlayAtStart"));
-			player.setHasImmunity(playerObject.getBoolean("hasImmunity"));
-			player.setRound(playerObject.getInt("round"));
-			playerList.setPlayer(player);
-		} while (iterator.hasNext());
+			player.setCanPlayAtStart(jsonPlayer.getBoolean("canPlayAtStart"));
+			player.setName(jsonPlayer.getString("name"));
+			player.setLostTurn(jsonPlayer.getBoolean("lostTurn"));
+			player.setPos(jsonPlayer.getInt("pos"));
+			player.setHasImmunity(jsonPlayer.getBoolean("hasImmunity"));
+			player.setRound(jsonPlayer.getInt("round"));
+
+			playerList.setPlayerList(player);
+		}
 		return playerList;
 	}
 
 	public void saveGame() throws IOException, JSONException {
 		chooser.setCurrentDirectory(new java.io.File("ProjectJava/src/main/resources/JsonFilesSaved"));
-		chooser.setDialogTitle("Choose a Game Slot to Save");
-		FileWriter file = new FileWriter(getFileChooser());
+		chooser.setDialogTitle("Save File");
 
+		JSONObject jsonPlayerList = obj.getJSONObject("playerList");
+		JSONObject jsonPlayer;
+
+		FileWriter file = new FileWriter(getFileChooser());
 		file.write("{\"dieNumber\":" + die.getDieBound() + ",\n");
 		file.write("\"GameStart\":\"" + obj.getString("GameStart") + "\",\n");
 		file.write("\"Interaction\":" + obj.get("Interaction") + ",\n");
+		file.write("\"boardType\":" + obj.getJSONObject("boardType") + ",\n");
 		file.write("\"Board\":" + obj.getJSONObject("Board") + ",\n");
-		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":{\n");
+		file.write("\"turn\":" + playerList.getPlayerNumber() + ",\n");
+		file.write("\"playerList\":{");
 
-		JSONObject player;
-		Iterator<?> iterator = this.JsonPlayerList.keys();
-		int j = 0;
-
-		do {
-			j += 1;
-			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
-			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":" + player);
-			player.put("round", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getRound());
-			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isCanPlayAtStart());
-			player.put("name", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getName());
-			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isLostTurn());
-			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getCurrentPos());
-			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isHasImmunity());
-			if (j < this.JsonPlayerList.length()) {
+		for (int i = 0; i < jsonPlayerList.length(); i++) {
+			file.write("\"player" + (i+1) + "\"" + ":");
+			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
+			jsonPlayer.put("round", playerList.getPlayerList().get(i).getRound());
+			jsonPlayer.put("canPlayAtStart", playerList.getPlayerList().get(i).isCanPlayAtStart());
+			jsonPlayer.put("name", playerList.getPlayerList().get(i).getName());
+			jsonPlayer.put("lostTurn", playerList.getPlayerList().get(i).isLostTurn());
+			jsonPlayer.put("pos", playerList.getPlayerList().get(i).getPos());
+			jsonPlayer.put("hasImmunity", playerList.getPlayerList().get(i).isHasImmunity());
+			file.write(String.valueOf(jsonPlayer));
+			if (i < (jsonPlayerList.length()-1)) {
 				file.write(",");
 			}
 			file.write("\n");
-			playerList.setCurrentPlayerNumber();
-		} while (iterator.hasNext());
-
+			playerList.setNextPlayerNumber();
+		}
 		file.write("\t}\n}");
 		file.flush();
 		file.close();

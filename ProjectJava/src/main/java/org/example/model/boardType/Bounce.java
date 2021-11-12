@@ -16,7 +16,7 @@ public class Bounce implements BoardType {
 			posAfterRoll = 2 * lastSquare - posAfterRoll;
 			Screen.displayMessage("Hit Board and Bounced back " + (lastSquare - posAfterRoll) + " squares , new position is " + (posAfterRoll + 1));
 		}
-		player.setCurrentPos(posAfterRoll);
+		player.setPos(posAfterRoll);
 		return winner = posAfterRoll == lastSquare;
 	}
 }

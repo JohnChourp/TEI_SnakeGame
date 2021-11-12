@@ -15,9 +15,9 @@ public class MoveOtherPlayer implements Interaction {
 
 	public void interactionAction(Player currentPlayer) {
 		for (int i = 0; i < playerList.getPlayerList().size(); i++) {
-			if (currentPlayer.getCurrentPos() == playerList.getPlayerList().get(i).getCurrentPos() && i != playerList.getCurrentPlayerNumber()) {
+			if (currentPlayer.getPos() == playerList.getPlayerList().get(i).getPos() && i != playerList.getPlayerNumber()) {
 				Screen.displayMessage(currentPlayer.getName() + " hits " + playerList.getPlayerList().get(i).getName());
-				playerList.getPlayerList().get(i).setCurrentPos(sendPlayerTo);
+				playerList.getPlayerList().get(i).setPos(sendPlayerTo);
 			}
 		}
 	}
