@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.model.boardType.Board;
 import org.example.model.gameStart.GameStart;
 import org.example.model.interaction.Interaction;
 import org.example.model.ui.QuitGame;
@@ -31,11 +32,11 @@ public class GameState {
 	}
 
 	public void setEndAction() {
-		board.getEndAction(currentPlayer.getCurrentPos() + rollDie(), currentPlayer);
+		board.getBoardType().endAction(currentPlayer.getCurrentPos() + rollDie(), currentPlayer);
 	}
 
 	public void setApplyAction() {
-		board.getApplyAction(currentPlayer.getCurrentPos()).applyAction(currentPlayer);
+		board.getSquares().get(currentPlayer.getCurrentPos()).applyAction(currentPlayer);
 	}
 
 	public boolean isWinner() {

@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.model.boardType.Board;
 import org.example.model.boardType.Bounce;
 import org.example.model.boardType.Classic;
 import org.example.model.boardType.Loop;
@@ -50,8 +51,7 @@ public class JsonIO {
 					tryAgain = true;
 					break;
 			}
-		}
-		while (tryAgain);
+		} while (tryAgain);
 	}
 
 	private void setJsonPlayerList() throws IOException, JSONException {
@@ -118,13 +118,13 @@ public class JsonIO {
 
 		switch (jsonBoardType.getString("type")) {
 			case "Bounce":
-				board.setBoardType(new Bounce());
+				board.setBoardType(new Bounce(squares.length() - 1));
 				break;
 			case "Classic":
-				board.setBoardType(new Classic());
+				board.setBoardType(new Classic(squares.length() - 1));
 				break;
 			case "Loop":
-				board.setBoardType(new Loop(jsonBoardType.getInt("rounds")));
+				board.setBoardType(new Loop(jsonBoardType.getInt("rounds"), squares.length() - 1));
 				break;
 		}
 
@@ -172,8 +172,7 @@ public class JsonIO {
 			player.setHasImmunity(playerObject.getBoolean("hasImmunity"));
 			player.setRound(playerObject.getInt("round"));
 			playerList.setPlayer(player);
-		}
-		while (iterator.hasNext());
+		} while (iterator.hasNext());
 		return playerList;
 	}
 
@@ -208,8 +207,7 @@ public class JsonIO {
 			}
 			file.write("\n");
 			playerList.setNextPlayer();
-		}
-		while (iterator.hasNext());
+		} while (iterator.hasNext());
 
 		file.write("\t}\n}");
 		file.flush();
