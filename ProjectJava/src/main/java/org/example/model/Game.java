@@ -1,5 +1,6 @@
 package org.example.model;
 
+import org.example.model.boardType.Board;
 import org.example.model.gameStart.GameStart;
 import org.example.model.interaction.Interaction;
 import org.example.model.ui.Screen;
@@ -30,8 +31,7 @@ public class Game {
 				player.setLostTurn(false);
 			}
 			gameState.setNextPlayer();
-		}
-		while (! gameState.isWinner() && gameState.isQuit());
+		} while (! gameState.isWinner() && gameState.isQuit());
 
 		if (gameState.isQuit()) {
 			Screen.displayMessage("\n!!! Player " + player.getName() + " Won !!!");

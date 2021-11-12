@@ -6,12 +6,14 @@ import org.example.model.ui.Screen;
 public class Loop implements BoardType {
 	boolean winner;
 	int rounds;
+	int lastSquare;
 
-	public Loop(int rounds) {
+	public Loop(int rounds, int squares) {
 		this.rounds = rounds;
+		this.lastSquare = squares;
 	}
 
-	public void endAction(int posAfterRoll, int lastSquare, Player player) {
+	public void endAction(int posAfterRoll, Player player) {
 
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = posAfterRoll - lastSquare;

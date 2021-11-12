@@ -4,8 +4,13 @@ import org.example.model.Player;
 
 public class Classic implements BoardType {
 	boolean winner;
+	int lastSquare;
 
-	public void endAction(int posAfterRoll, int lastSquare, Player player) {
+	public Classic(int squares) {
+		this.lastSquare = squares;
+	}
+
+	public void endAction(int posAfterRoll, Player player) {
 		if (posAfterRoll >= lastSquare) {
 			winner = true;
 			player.setCurrentPos(lastSquare);
