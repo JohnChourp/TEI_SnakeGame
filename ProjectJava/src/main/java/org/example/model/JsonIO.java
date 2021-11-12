@@ -110,8 +110,8 @@ public class JsonIO {
 	}
 
 	public Board getBoard() throws JSONException {
+		JSONObject jsonBoardType = (JSONObject) obj.get("boardType");
 		JSONObject jsonBoard = obj.getJSONObject("Board");
-		JSONObject jsonBoardType = jsonBoard.getJSONObject("boardType");
 		JSONArray squares = jsonBoard.getJSONArray("squares");
 		JSONObject square;
 		Board board = new Board();
@@ -152,27 +152,24 @@ public class JsonIO {
 		return board;
 	}
 
-	public Player setPlayer() {
-		return new Player();
-	}
-
 	public PlayerList getPlayerList() throws JSONException {
-		Iterator<?> iterator = this.JsonPlayerList.keys();
+		JSONObject jsonPlayerList = obj.getJSONObject("playerList");
+		JSONObject jsonPlayer;
 		Player player;
-		JSONObject playerObject;
 
-		do {
+		for (int i = 1; i < 4; i++) {
 			player = new Player();
-			playerObject = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
+			jsonPlayer = jsonPlayerList.getJSONObject("player"+i);
 
-			player.setName(playerObject.getString("name"));
-			player.setPos(playerObject.getInt("currentPos"));
-			player.setLostTurn(playerObject.getBoolean("lostTurn"));
-			player.setCanPlayAtStart(playerObject.getBoolean("canPlayAtStart"));
-			player.setHasImmunity(playerObject.getBoolean("hasImmunity"));
-			player.setRound(playerObject.getInt("round"));
+			player.setCanPlayAtStart(jsonPlayer.getBoolean("canPlayAtStart"));
+			player.setName(jsonPlayer.getString("name"));
+			player.setLostTurn(jsonPlayer.getBoolean("lostTurn"));
+			player.setPos(jsonPlayer.getInt("pos"));
+			player.setHasImmunity(jsonPlayer.getBoolean("hasImmunity"));
+			player.setRound(jsonPlayer.getInt("round"));
+
 			playerList.setPlayerList(player);
-		} while (iterator.hasNext());
+		}
 		return playerList;
 	}
 
@@ -194,12 +191,12 @@ public class JsonIO {
 		do {
 			j += 1;
 			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
-			file.write("\t\"player" + (playerList.getPlayerNumber() + 1) + "\":" + player);
+			file.write("\t\"player" + (playerList.getPlayerNumber()) + "\":" + player);
 			player.put("round", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).getRound());
 			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).isCanPlayAtStart());
 			player.put("name", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).getName());
 			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).isLostTurn());
-			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).getPos());
+			player.put("pos", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).getPos());
 			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getPlayerNumber()).isHasImmunity());
 			if (j < this.JsonPlayerList.length()) {
 				file.write(",");
