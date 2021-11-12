@@ -15,7 +15,7 @@ public class Snake implements SquareInfo {
 			currentPlayer.setHasImmunity(false);
 			Screen.displayMessage("Used immunity");
 		} else {
-			currentPlayer.setCurrentPos(goToSquare);
+			currentPlayer.setCurrentPos(goToSquare - 1);
 			Screen.displayMessage("Pressed Snake ");
 		}
 	}
