@@ -20,14 +20,14 @@ public class Game {
 		do {
 			player = gameState.setCurrentPlayer();
 			Screen.displayMessage("\nIt's " + player.getName() + "'s turn.");
-			gameState.setStartCondition();
+			gameState.gameStartAction();
 
 			if (player.isCanPlayAtStart() && gameState.isQuit() && ! player.isLostTurn()) {
-				winner = gameState.setEndAction();
+				winner = gameState.boardTypeAction();
 				Screen.displayMessage("Die number is " + gameState.getDieNumber());
-				gameState.setApplyAction();
-				gameState.setMeetPlayerAction();
-				Screen.displayMessage("New position is " + (playerList.getCurrentPlayerPos() + 1));
+				gameState.squareInfoAction();
+				gameState.interactionAction();
+				Screen.displayMessage("New position is " + (playerList.getPlayerList().get(playerList.getCurrentPlayerNumber()).getCurrentPos() + 1));
 			} else {
 				player.setLostTurn(false);
 			}

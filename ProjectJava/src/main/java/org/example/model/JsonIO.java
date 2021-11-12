@@ -141,8 +141,8 @@ public class JsonIO {
 				case "Snake":
 					board.addSquare(new Snake(square.getInt("GotoSquare")));
 					break;
-				case "SquareLoseTurn":
-					board.addSquare(new SquareLoseTurn());
+				case "loseTurn":
+					board.addSquare(new loseTurn());
 					break;
 				case "GetImmunity":
 					board.addSquare(new GetImmunity());
@@ -152,7 +152,7 @@ public class JsonIO {
 		return board;
 	}
 
-	public Player getCurrentPlayer() {
+	public Player setPlayer() {
 		return new Player();
 	}
 
@@ -181,11 +181,11 @@ public class JsonIO {
 		chooser.setDialogTitle("Choose a Game Slot to Save");
 		FileWriter file = new FileWriter(getFileChooser());
 
-		file.write("{\n\"dieNumber\":" + die.getDieBound() + ",\n");
+		file.write("{\"dieNumber\":" + die.getDieBound() + ",\n");
 		file.write("\"GameStart\":\"" + obj.getString("GameStart") + "\",\n");
 		file.write("\"Interaction\":" + obj.get("Interaction") + ",\n");
 		file.write("\"Board\":" + obj.getJSONObject("Board") + ",\n");
-		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":\n\t{\n");
+		file.write("\"turn\":" + playerList.getCurrentPlayerNumber() + ",\n" + "\"playerList\":{\n");
 
 		JSONObject player;
 		Iterator<?> iterator = this.JsonPlayerList.keys();
@@ -194,19 +194,18 @@ public class JsonIO {
 		do {
 			j += 1;
 			player = (JSONObject) this.JsonPlayerList.get(iterator.next().toString());
-			player.put("name", playerList.getCurrentPlayer().getName());
-			player.put("currentPos", playerList.getCurrentPlayer().getCurrentPos());
-			player.put("lostTurn", playerList.getCurrentPlayer().isLostTurn());
-			player.put("canPlayAtStart", playerList.getCurrentPlayer().isCanPlayAtStart());
-			player.put("hasImmunity", playerList.getCurrentPlayer().isHasImmunity());
-			player.put("round", playerList.getCurrentPlayer().getRound());
-			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":\n\t\t" + player);
-
-			if (j < playerList.getPlayerListSize()) {
+			file.write("\t\"player" + (playerList.getCurrentPlayerNumber() + 1) + "\":" + player);
+			player.put("round", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getRound());
+			player.put("canPlayAtStart", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isCanPlayAtStart());
+			player.put("name", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getName());
+			player.put("lostTurn", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isLostTurn());
+			player.put("currentPos", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).getCurrentPos());
+			player.put("hasImmunity", playerList.getPlayerList().get(getPlayerList().getCurrentPlayerNumber()).isHasImmunity());
+			if (j < this.JsonPlayerList.length()) {
 				file.write(",");
 			}
 			file.write("\n");
-			playerList.setNextPlayer();
+			playerList.setCurrentPlayerNumber();
 		} while (iterator.hasNext());
 
 		file.write("\t}\n}");
