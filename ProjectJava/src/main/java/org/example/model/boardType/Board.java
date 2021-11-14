@@ -1,26 +1,13 @@
 package org.example.model.boardType;
 
-import org.example.model.squares.SquareInfo;
-
-import java.util.ArrayList;
-
 public class Board {
-	private final ArrayList<SquareInfo> squares = new ArrayList<>();
-	private BoardType boardType;
+	private BoardInfo boardInfo;
 
-	public ArrayList<SquareInfo> getSquares() {
-		return squares;
+	public BoardInfo getBoardType() {
+		return boardInfo;
 	}
 
-	public void addSquare(SquareInfo squareToAdd) {
-		squares.add(squareToAdd);
-	}
-
-	public BoardType getBoardType() {
-		return boardType;
-	}
-
-	public void setBoardType(BoardType boardType) {
-		this.boardType = boardType;
+	public void setBoardType(BoardInfo boardInfo) {
+		this.boardInfo = boardInfo;
 	}
 }

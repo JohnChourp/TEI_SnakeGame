@@ -1,6 +1,7 @@
 package org.example.model;
 
 import org.example.model.boardType.Board;
+import org.example.model.squares.Squares;
 import org.example.model.boardType.Bounce;
 import org.example.model.boardType.Classic;
 import org.example.model.boardType.Loop;
@@ -114,11 +115,10 @@ public class JsonIO {
 		return interaction;
 	}
 
-	public Board loadBoard() throws JSONException {
+	public Board loadBoardType() throws JSONException {
 		JSONObject jsonBoardType = (JSONObject) obj.get("boardType");
 		JSONObject jsonBoard = obj.getJSONObject("Board");
 		JSONArray squares = jsonBoard.getJSONArray("squares");
-		JSONObject square;
 		Board board = new Board();
 
 		switch (jsonBoardType.getString("type")) {
@@ -132,29 +132,37 @@ public class JsonIO {
 				board.setBoardType(new Loop(jsonBoardType.getInt("rounds"), squares.length() - 1));
 				break;
 		}
+		return board;
+	}
 
-		for (int i = 0; i < squares.length(); i++) {
-			square = (JSONObject) squares.get(i);
+	public Squares loadSquares() throws JSONException {
+		JSONObject jsonBoard = obj.getJSONObject("Board");
+		JSONArray jsonSquares = jsonBoard.getJSONArray("squares");
+		JSONObject square;
+		Squares squares = new Squares();
+
+		for (int i = 0; i < jsonSquares.length(); i++) {
+			square = (JSONObject) jsonSquares.get(i);
 
 			switch (square.getString("SquareInfo")) {
 				case "Empty":
-					board.addSquare(new Empty());
+					squares.addSquare(new Empty());
 					break;
 				case "Ladder":
-					board.addSquare(new Ladder(square.getInt("GotoSquare")));
+					squares.addSquare(new Ladder(square.getInt("GotoSquare")));
 					break;
 				case "Snake":
-					board.addSquare(new Snake(square.getInt("GotoSquare")));
+					squares.addSquare(new Snake(square.getInt("GotoSquare")));
 					break;
 				case "loseTurn":
-					board.addSquare(new loseTurn());
+					squares.addSquare(new loseTurn());
 					break;
 				case "GetImmunity":
-					board.addSquare(new GetImmunity());
+					squares.addSquare(new GetImmunity());
 					break;
 			}
 		}
-		return board;
+		return squares;
 	}
 
 	public PlayerList loadPlayerList() throws JSONException {

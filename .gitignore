@@ -4,10 +4,10 @@
 /target/classes/.idea/.name
 /target/classes/target/classes/.idea/.name
 /target/classes/target/classes/target/classes/.idea/.name
-/target/classes/org/example/model/boardType/Board.class
-/target/classes/org/example/model/boardType/BoardType.class
-/target/classes/org/example/model/boardType/Bounce.class
-/target/classes/org/example/model/boardType/Classic.class
+/target/classes/org/example/model/boardInfo/Board.class
+/target/classes/org/example/model/boardInfo/BoardType.class
+/target/classes/org/example/model/boardInfo/Bounce.class
+/target/classes/org/example/model/boardInfo/Classic.class
 /target/classes/.idea/codeStyles/codeStyleConfig.xml
 /target/classes/target/classes/.idea/codeStyles/codeStyleConfig.xml
 /target/classes/target/classes/target/classes/.idea/codeStyles/codeStyleConfig.xml
@@ -38,7 +38,7 @@
 /target/classes/target/classes/target/classes/LICENSE
 /target/classes/target/classes/LICENSE
 /target/classes/LICENSE
-/target/classes/org/example/model/boardType/Loop.class
+/target/classes/org/example/model/boardInfo/Loop.class
 /target/classes/org/example/model/squares/loseTurn.class
 /target/classes/org/example/model/Main.class
 /target/classes/.idea/libraries/Maven__junit_junit_4_13_2.xml
@@ -100,3 +100,9 @@
 /target/classes/target/classes/target/classes/.gitignore
 /target/classes/target/classes/.gitignore
 /target/classes/.gitignore
+/target/classes/org/example/model/boardType/Board.class
+/target/classes/org/example/model/boardType/BoardInfo.class
+/target/classes/org/example/model/boardType/Bounce.class
+/target/classes/org/example/model/boardType/Classic.class
+/target/classes/org/example/model/boardType/Loop.class
+/target/classes/org/example/model/squares/Squares.class

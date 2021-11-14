@@ -1,12 +1,14 @@
 package org.example.model;
 
 import org.example.model.boardType.Board;
+import org.example.model.squares.Squares;
 import org.example.model.gameStart.GameStart;
 import org.example.model.interaction.Interaction;
 import org.example.model.ui.QuitGame;
 
 public class GameState {
 	private final Board board;
+	private final Squares squares;
 	private final PlayerList playerList;
 	private final Die die;
 	private final GameStart gameStart;
@@ -14,8 +16,9 @@ public class GameState {
 	private final QuitGame quit = new QuitGame();
 	private Player player;
 
-	public GameState(Board board, PlayerList playerList, Die die, GameStart gameStart, Interaction interaction, Player player) {
+	public GameState(Board board, Squares squares, PlayerList playerList, Die die, GameStart gameStart, Interaction interaction, Player player) {
 		this.board = board;
+		this.squares = squares;
 		this.playerList = playerList;
 		this.die = die;
 		this.gameStart = gameStart;
@@ -42,7 +45,7 @@ public class GameState {
 	}
 
 	public void squareInfoAction() {
-		board.getSquares().get(player.getPos()).squareInfoAction(player);
+		squares.getSquares().get(player.getPos()).squareInfoAction(player);
 	}
 
 	public void interactionAction() {
