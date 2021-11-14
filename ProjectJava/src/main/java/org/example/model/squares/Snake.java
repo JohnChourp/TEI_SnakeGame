@@ -10,13 +10,13 @@ public class Snake implements SquareInfo {
 		this.goToSquare = goToSquare;
 	}
 
-	public void squareInfoAction(Player currentPlayer) {
-		if (currentPlayer.isHasImmunity()) {
-			currentPlayer.setHasImmunity(false);
+	public void squareInfoAction(Player player) {
+		if (player.isHasImmunity()) {
+			player.setHasImmunity(false);
 			Screen.displayMessage("Used immunity");
 		} else {
-			currentPlayer.setPos(goToSquare - 1);
-			Screen.displayMessage("Pressed Snake ");
+			player.setPos(goToSquare - 1);
+			Screen.displayMessage("Pressed Snake");
 		}
 	}
 }

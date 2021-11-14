@@ -106,3 +106,4 @@
 /target/classes/org/example/model/boardType/Classic.class
 /target/classes/org/example/model/boardType/Loop.class
 /target/classes/org/example/model/squares/Squares.class
+/target/classes/org/example/model/squares/Win.class

@@ -9,7 +9,7 @@ public class Squares {
 		return squares;
 	}
 
-	public void addSquare(SquareInfo squareToAdd) {
-		squares.add(squareToAdd);
+	public void addSquare(SquareInfo addSquare) {
+		squares.add(addSquare);
 	}
 }

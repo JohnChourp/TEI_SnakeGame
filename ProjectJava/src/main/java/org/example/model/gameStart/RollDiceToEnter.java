@@ -11,12 +11,12 @@ public class RollDiceToEnter implements GameStart {
 		this.die = die;
 	}
 
-	public void gameStartAction(Player currentPlayer) {
-		if (! currentPlayer.isCanPlayAtStart()) {
-			currentPlayer.setCanPlayAtStart(die.rollDie() == 6);
+	public void gameStartAction(Player player) {
+		if (! player.isCanPlayAtStart()) {
+			player.setCanPlayAtStart(die.rollDie() == 6);
 			Screen.displayMessage("Die number is " + die.rollDie());
 
-			if (currentPlayer.isCanPlayAtStart()) {
+			if (player.isCanPlayAtStart()) {
 				Screen.displayMessage("Entered Board");
 			} else {
 				Screen.displayMessage("Number was not 6, Try next round");

@@ -4,7 +4,6 @@ import org.example.model.Player;
 import org.example.model.ui.Screen;
 
 public class Loop implements BoardInfo {
-	boolean winner;
 	int rounds;
 	int lastSquare;
 
@@ -13,8 +12,7 @@ public class Loop implements BoardInfo {
 		this.lastSquare = squares;
 	}
 
-	public boolean boardTypeAction(int posAfterRoll, Player player) {
-
+	public void boardTypeAction(int posAfterRoll, Player player) {
 		if (posAfterRoll > lastSquare) {
 			posAfterRoll = posAfterRoll - lastSquare;
 			player.setRound();
@@ -24,8 +22,6 @@ public class Loop implements BoardInfo {
 
 		if (player.getRound() == rounds) {
 			player.setPos(lastSquare);
-			winner = true;
 		}
-		return winner;
 	}
 }

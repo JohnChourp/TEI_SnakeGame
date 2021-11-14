@@ -13,10 +13,10 @@ public class MoveOtherPlayer implements Interaction {
 		this.playerList = playerList;
 	}
 
-	public void interactionAction(Player currentPlayer) {
+	public void interactionAction(Player player) {
 		for (int i = 0; i < playerList.getPlayerList().size(); i++) {
-			if (currentPlayer.getPos() == playerList.getPlayerList().get(i).getPos() && i != playerList.getPlayerNumber()) {
-				Screen.displayMessage(currentPlayer.getName() + " hits " + playerList.getPlayerList().get(i).getName());
+			if (player.getPos() == playerList.getPlayerList().get(i).getPos() && i != playerList.getPlayerNumber()) {
+				Screen.displayMessage(player.getName() + " hits " + playerList.getPlayerList().get(i).getName());
 				playerList.getPlayerList().get(i).setPos(sendPlayerTo);
 			}
 		}

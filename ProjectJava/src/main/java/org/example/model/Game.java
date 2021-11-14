@@ -16,15 +16,14 @@ public class Game {
 	public void play() {
 		Player player;
 		PlayerList playerList = gameState.getPlayerList();
-		boolean winner = false;
 
 		do {
-			player = gameState.setCurrentPlayer();
+			player = gameState.setPlayer();
 			Screen.displayMessage("\nIt's " + player.getName() + "'s turn.");
 			gameState.gameStartAction();
 
 			if (player.isCanPlayAtStart() && gameState.isQuit() && ! player.isLostTurn()) {
-				winner = gameState.boardTypeAction();
+				gameState.boardTypeAction();
 				Screen.displayMessage("Die number is " + gameState.getDieNumber());
 				gameState.squareInfoAction();
 				gameState.interactionAction();
@@ -33,7 +32,7 @@ public class Game {
 				player.setLostTurn(false);
 			}
 			gameState.setNextPlayer();
-		} while (! winner && gameState.isQuit());
+		} while (! player.isWinner() && gameState.isQuit());
 
 		if (gameState.isQuit()) {
 			Screen.displayMessage("\n!!! Player " + player.getName() + " Won !!!");

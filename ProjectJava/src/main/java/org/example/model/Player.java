@@ -7,6 +7,7 @@ public class Player {
 	private boolean canPlayAtStart;
 	private boolean hasImmunity;
 	private int round;
+	private boolean winner;
 
 	public String getName() {
 		return name;
@@ -58,5 +59,13 @@ public class Player {
 
 	public void setRound() {
 		this.round = round + 1;
+	}
+
+	public boolean isWinner() {
+		return winner;
+	}
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
 	}
 }

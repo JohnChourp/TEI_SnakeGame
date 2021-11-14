@@ -10,8 +10,14 @@ public class Ladder implements SquareInfo {
 		this.goToSquare = goToSquare;
 	}
 
-	public void squareInfoAction(Player currentPlayer) {
-		currentPlayer.setPos(goToSquare - 1);
-		Screen.displayMessage("Pressed ladder ");
+	public void squareInfoAction(Player player) {
+		if (player.isHasImmunity()) {
+			player.setHasImmunity(false);
+			Screen.displayMessage("Used immunity");
+		} else {
+			player.setPos(goToSquare - 1);
+			Screen.displayMessage("Pressed ladder");
+		}
+
 	}
 }
