@@ -160,6 +160,9 @@ public class JsonIO {
 				case "GetImmunity":
 					squares.addSquare(new GetImmunity());
 					break;
+				case "Winner":
+					squares.addSquare(new Win());
+					break;
 			}
 		}
 		return squares;
@@ -174,13 +177,13 @@ public class JsonIO {
 			player = new Player();
 			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
 
-			player.setCanPlayAtStart(jsonPlayer.getBoolean("canPlayAtStart"));
 			player.setName(jsonPlayer.getString("name"));
-			player.setLostTurn(jsonPlayer.getBoolean("lostTurn"));
 			player.setPos(jsonPlayer.getInt("pos"));
+			player.setLostTurn(jsonPlayer.getBoolean("lostTurn"));
+			player.setCanPlayAtStart(jsonPlayer.getBoolean("canPlayAtStart"));
 			player.setHasImmunity(jsonPlayer.getBoolean("hasImmunity"));
 			player.setRound(jsonPlayer.getInt("round"));
-
+			player.setWinner(jsonPlayer.getBoolean("winner"));
 			playerList.setPlayerList(player);
 		}
 		return playerList;
@@ -205,12 +208,13 @@ public class JsonIO {
 		for (int i = 0; i < jsonPlayerList.length(); i++) {
 			file.write("\"player" + (i+1) + "\"" + ":");
 			jsonPlayer = jsonPlayerList.getJSONObject("player" + (i+1));
-			jsonPlayer.put("round", playerList.getPlayerList().get(i).getRound());
-			jsonPlayer.put("canPlayAtStart", playerList.getPlayerList().get(i).isCanPlayAtStart());
 			jsonPlayer.put("name", playerList.getPlayerList().get(i).getName());
-			jsonPlayer.put("lostTurn", playerList.getPlayerList().get(i).isLostTurn());
 			jsonPlayer.put("pos", playerList.getPlayerList().get(i).getPos());
+			jsonPlayer.put("lostTurn", playerList.getPlayerList().get(i).isLostTurn());
+			jsonPlayer.put("canPlayAtStart", playerList.getPlayerList().get(i).isCanPlayAtStart());
 			jsonPlayer.put("hasImmunity", playerList.getPlayerList().get(i).isHasImmunity());
+			jsonPlayer.put("round", playerList.getPlayerList().get(i).getRound());
+			jsonPlayer.put("winner", playerList.getPlayerList().get(i).isWinner());
 			file.write(String.valueOf(jsonPlayer));
 			if (i < (jsonPlayerList.length()-1)) {
 				file.write(",");

@@ -30,7 +30,11 @@ public class GameState {
 		return playerList;
 	}
 
-	public Player setCurrentPlayer() {
+	public Squares getSquares() {
+		return squares;
+	}
+
+	public Player setPlayer() {
 		return player = playerList.getPlayerList().get(playerList.getPlayerNumber());
 	}
 
@@ -40,8 +44,8 @@ public class GameState {
 		}
 	}
 
-	public boolean boardTypeAction() {
-		return board.getBoardType().boardTypeAction(player.getPos() + die.rollDie(), player);
+	public void boardTypeAction() {
+		board.getBoardType().boardTypeAction(player.getPos() + die.rollDie(), player);
 	}
 
 	public void squareInfoAction() {
