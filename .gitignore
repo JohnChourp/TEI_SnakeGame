@@ -100,3 +100,9 @@
 /target/classes/target/classes/target/classes/.gitignore
 /target/classes/target/classes/.gitignore
 /target/classes/.gitignore
+/target/classes/org/example/model/boardType/Board.class
+/target/classes/org/example/model/boardType/BoardInfo.class
+/target/classes/org/example/model/boardType/Bounce.class
+/target/classes/org/example/model/boardType/Classic.class
+/target/classes/org/example/model/boardType/Loop.class
+/target/classes/org/example/model/squares/Squares.class
