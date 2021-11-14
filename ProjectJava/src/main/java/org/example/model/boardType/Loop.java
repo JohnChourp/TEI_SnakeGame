@@ -3,7 +3,7 @@ package org.example.model.boardType;
 import org.example.model.Player;
 import org.example.model.ui.Screen;
 
-public class Loop implements BoardType {
+public class Loop implements BoardInfo {
 	boolean winner;
 	int rounds;
 	int lastSquare;

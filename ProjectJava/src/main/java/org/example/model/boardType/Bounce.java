@@ -3,7 +3,7 @@ package org.example.model.boardType;
 import org.example.model.Player;
 import org.example.model.ui.Screen;
 
-public class Bounce implements BoardType {
+public class Bounce implements BoardInfo {
 	boolean winner;
 	int lastSquare;
 

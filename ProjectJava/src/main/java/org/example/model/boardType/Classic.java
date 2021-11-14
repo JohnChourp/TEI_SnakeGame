@@ -2,7 +2,7 @@ package org.example.model.boardType;
 
 import org.example.model.Player;
 
-public class Classic implements BoardType {
+public class Classic implements BoardInfo {
 	boolean winner;
 	int lastSquare;
 

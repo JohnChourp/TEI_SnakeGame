@@ -3,13 +3,14 @@ package org.example.model;
 import org.example.model.boardType.Board;
 import org.example.model.gameStart.GameStart;
 import org.example.model.interaction.Interaction;
+import org.example.model.squares.Squares;
 import org.example.model.ui.Screen;
 
 public class Game {
 	GameState gameState;
 
-	public Game(Board board, PlayerList playerList, Die die, GameStart gameRules, Interaction interaction, Player currentPlayer) {
-		gameState = new GameState(board, playerList, die, gameRules, interaction, currentPlayer);
+	public Game(Board board, Squares squares, PlayerList playerList, Die die, GameStart gameRules, Interaction interaction, Player currentPlayer) {
+		gameState = new GameState(board, squares, playerList, die, gameRules, interaction, currentPlayer);
 	}
 
 	public void play() {
