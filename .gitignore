@@ -107,3 +107,6 @@
 /target/classes/org/example/model/boardType/Loop.class
 /target/classes/org/example/model/squares/Squares.class
 /target/classes/org/example/model/squares/Win.class
+/.idea/encodings.xml
+/target/classes/.idea/encodings.xml
+/target/classes/target/classes/.idea/encodings.xml
